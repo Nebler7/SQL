@@ -1,0 +1,35 @@
+--Create a pet store database
+
+CREATE TABLE pet_store (id INTEGER PRIMARY KEY, pet_type TEXT, item TEXT, price INTEGER, aisle INTEGER, on_hand INTEGER);
+
+INSERT INTO pet_store VALUES (1, "Dog", "Shirt", 15, 5, 20);
+INSERT INTO pet_store VALUES (2, "Cat", "Shirt", 11, 6, 20);
+INSERT INTO pet_store VALUES (3, "Dog", "Brush", 7, 7, 15);
+INSERT INTO pet_store VALUES (4, "Cat", "Brush", 6, 8, 10);
+INSERT INTO pet_store VALUES (5, "Fish", "Tank", 30, 1, 10);
+INSERT INTO pet_store VALUES (6, "Fish", "Fish", 2, 2, 100);
+INSERT INTO pet_store VALUES (7, "Dog", "Food", 20, 9, 30);
+INSERT INTO pet_store VALUES (8, "Cat", "Food", 20, 10, 30);
+INSERT INTO pet_store VALUES (9, "Fish", "Food", 10, 3, 30);
+INSERT INTO pet_store VALUES (10, "Fish", "Decor", 8, 4, 25);
+INSERT INTO pet_store VALUES (11, "Dog", "Leashes", 6, 11, 15);
+INSERT INTO pet_store VALUES (12, "Cat", "Collars", 4, 12, 10);
+INSERT INTO pet_store VALUES (13, "Dog", "Bowls", 5, 13, 10);
+INSERT INTO pet_store VALUES (14, "Cat", "Bowls", 5, 14, 10);
+INSERT INTO pet_store VALUES (15, "Dog", "Toys", 8, 15, 25);
+INSERT INTO pet_store VALUES (16, "Cat", "Toys", 6, 16, 25);
+
+--Display the database ordered by price
+SELECT * FROM pet_store ORDER BY price;
+
+--Display the database ordered by pet type
+SELECT * FROM pet_store ORDER BY pet_type;
+
+--What is the total price of all items in the pet store?
+SELECT SUM(price) FROM pet_store;
+
+--What is the total price of merchandise for each pet type?
+SELECT pet_type, SUM(price) FROM pet_store GROUP BY pet_type;
+
+--What is the average price of items for each pet type?
+SELECT pet_type, AVG(price) FROM pet_store GROUP BY pet_type;
