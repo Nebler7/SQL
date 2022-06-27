@@ -1,0 +1,62 @@
+#In this project, I downloaded Spotify data from Kaggle, created a table of the data and performed analytics using SQL. 
+
+--Creating the table:
+CREATE TABLE SpotifyData (
+    id               INTEGER        PRIMARY KEY,
+    artist_name      VARCHAR        NOT NULL,
+    track_name       VARCHAR        NOT NULL,
+    track_id         VARCHAR        NOT NULL,
+    popularity       INTEGER        NOT NULL,
+    danceability     DECIMAL (4, 3) NOT NULL,
+    energy           DECIMAL (4, 3) NOT NULL,
+    [key]            INTEGER        NOT NULL,
+    loudness         DECIMAL (5, 3) NOT NULL,
+    mode             INTEGER        NOT NULL,
+    speechiness      DECIMAL (5, 4) NOT NULL,
+    acousticness     DECIMAL (6, 5) NOT NULL,
+    instrumentalness TEXT           NOT NULL,
+    liveness         DECIMAL (5, 4) NOT NULL,
+    valence          DECIMAL (4, 3) NOT NULL,
+    tempo            DECIMAL (6, 3) NOT NULL,
+    duration_ms      INTEGER        NOT NULL,
+    time_signature   INTEGER        NOT NULL
+);
+
+#Then I inserted the Spotify data .csv into the table.
+
+#Expolring the data using SQL:
+
+--List the tracks and their artists in order of ascending popularity.
+SELECT artist_name, track_name, popularity 
+FROM BIT_DB.SpotifyData 
+ORDER BY popularity asc;
+
+--What are the 5 most danceable songs?
+SELECT artist_name, track_name, danceability 
+FROM BIT_DB.SpotifyData 
+ORDER BY danceability desc 
+LIMIT 5;
+
+--What is the average duration of the songs?
+SELECT AVG(duration_ms) 
+FROM BIT_DB.SpotifyData;
+
+--Which songs are in major?
+SELECT artist_name, track_name 
+FROM BIT_DB.SpotifyData 
+WHERE mode = 1;
+
+--Which songs have the most spoken words and the lowest energy?
+SELECT artist_name, track_name, speechiness, energy 
+FROM BIT_DB.SpotifyData 
+WHERE speechiness >=0.1 AND energy <0.6;
+
+--Organize the songs as having fast, medium, or slow tempo.
+SELECT artist_name, track_name,
+    CASE 
+        WHEN tempo > 130 THEN 'Fast'
+        WHEN tempo > 100 THEN 'Medium'
+        ELSE 'Slow'
+        END AS BPM
+        FROM BIT_DB.SpotifyData
+        ORDER BY BPM;
