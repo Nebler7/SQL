@@ -69,7 +69,7 @@ FROM BIT_DB.FebSales fs
 LEFT JOIN BIT_DB.customers c 
 ON fs.orderid=c.order_id;
 
---Which product brount in the most revenue in January and how much revenue did it bring in total?
+--Which product brought in the most revenue in January and how much revenue did it bring in total?
 SELECT product, SUM(price*quantity) AS revenue 
 FROM BIT_DB.JanSales 
 GROUP BY product 
