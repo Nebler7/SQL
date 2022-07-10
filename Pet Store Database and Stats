@@ -57,3 +57,59 @@ UPDATE pet_store SET Sales = 10 WHERE id = 16;
 
 --How many items have been sold so far?
 SELECT SUM(Sales) FROM pet_store;
+
+--Update table to include a column for how much each item costs the store to purchase for sale.
+ALTER TABLE pet_store 
+ADD store_cost;
+
+UPDATE pet_store SET store_cost = 6 WHERE id = 1;
+UPDATE pet_store SET store_cost = 8 WHERE id = 2;
+UPDATE pet_store SET store_cost = 4 WHERE id = 3;
+UPDATE pet_store SET store_cost = 3 WHERE id = 4;
+UPDATE pet_store SET store_cost = 20 WHERE id = 5;
+UPDATE pet_store SET store_cost = 1 WHERE id = 6;
+UPDATE pet_store SET store_cost = 16 WHERE id = 7;
+UPDATE pet_store SET store_cost = 14 WHERE id = 8;
+UPDATE pet_store SET store_cost = 6 WHERE id = 9;
+UPDATE pet_store SET store_cost = 6 WHERE id = 10;
+UPDATE pet_store SET store_cost = 3 WHERE id = 11;
+UPDATE pet_store SET store_cost = 2 WHERE id = 12;
+UPDATE pet_store SET store_cost = 3 WHERE id = 13;
+UPDATE pet_store SET store_cost = 2 WHERE id = 14;
+UPDATE pet_store SET store_cost = 5 WHERE id = 15;
+UPDATE pet_store SET store_cost = 4 WHERE id = 16;
+
+--What is the revenue of all item sales?
+SELECT SUM (Sales * price) AS Revenue 
+FROM pet_store;
+
+--What is the net profit of all item sales?
+SELECT SUM(sales * price) - SUM(store_cost) AS Net_Profit 
+FROM pet_store;
+ 
+--Which pet category had the largest profit?
+SELECT distinct pet_type, SUM(sales * price) - SUM(store_cost) AS Profit 
+FROM pet_store 
+GROUP BY pet_type 
+ORDER BY Profit DESC 
+LIMIT 1;
+
+--Which pet_category had the most sales?
+SELECT distinct pet_type, SUM(sales) AS Total_Sales
+FROM pet_store 
+GROUP BY pet_type 
+ORDER BY sales DESC
+LIMIT 1;
+
+--Show the price, number of sales, and profit of the most profitable items?
+SELECT Pet_type, item, price, sales, SUM(sales * price) - SUM(store_cost) AS Profit 
+FROM pet_store GROUP BY item 
+ORDER BY Profit DESC 
+LIMIT 1;
+
+---Show the price, number of sales, and profit of the least profitable items?
+SELECT Pet_type, item, price, sales, SUM(sales * price) - SUM(store_cost) AS Profit 
+FROM pet_store GROUP BY item 
+ORDER BY Profit ASC 
+LIMIT 1;
+
