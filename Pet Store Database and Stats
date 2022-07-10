@@ -33,3 +33,27 @@ SELECT pet_type, SUM(price) FROM pet_store GROUP BY pet_type;
 
 --What is the average price of items for each pet type?
 SELECT pet_type, AVG(price) FROM pet_store GROUP BY pet_type;
+
+--Update table to include a column for how many of each item were sold.
+ALTER TABLE pet_store 
+ADD sales;
+
+UPDATE pet_store SET Sales = 10 WHERE id = 1;
+UPDATE pet_store SET Sales = 11 WHERE id = 2;
+UPDATE pet_store SET Sales = 6 WHERE id = 3;
+UPDATE pet_store SET Sales = 8 WHERE id = 4;
+UPDATE pet_store SET Sales = 3 WHERE id = 5;
+UPDATE pet_store SET Sales = 7 WHERE id = 6;
+UPDATE pet_store SET Sales = 10 WHERE id = 7;
+UPDATE pet_store SET Sales = 6 WHERE id = 8;
+UPDATE pet_store SET Sales = 9 WHERE id = 9;
+UPDATE pet_store SET Sales = 12 WHERE id = 10;
+UPDATE pet_store SET Sales = 1 WHERE id = 11;
+UPDATE pet_store SET Sales = 8 WHERE id = 12;
+UPDATE pet_store SET Sales = 4 WHERE id = 13;
+UPDATE pet_store SET Sales = 7 WHERE id = 14;
+UPDATE pet_store SET Sales = 5 WHERE id = 15;
+UPDATE pet_store SET Sales = 10 WHERE id = 16;
+
+--How many items have been sold so far?
+SELECT SUM(Sales) FROM pet_store;
