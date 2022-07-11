@@ -1,0 +1,19 @@
+#This SQL analyzes sales and location data from 2019 of the top 50 Fast Food restaurants in the US.
+
+--Which company has the most sales in millions?
+SELECT company, sales_in_millions_2019 FROM Fast_Food ORDER BY sales_in_millions_2019 DESC LIMIT 1;
+
+--Which company has the most franchises?
+SELECT company, franchised_units_2019 FROM Fast_Food ORDER BY franchised_units_2019 DESC LIMIT 1;
+
+--Which company has the most company owned locations?
+SELECT company, company_owned_units_2019 FROM Fast_Food ORDER BY company_owned_units_2019 DESC LIMIT 1;
+
+--Show the unit changes of all companies from greatest to least?
+SELECT company, unit_change_from_2018 FROM Fast_Food ORDER BY unit_change_from_2018 DESC;
+
+--What is the total sales in millions of each category of company?
+SELECT category, SUM(sales_in_millions_2019) AS Total_Sales FROM Fast_Food GROUP BY category ORDER BY Total_Sales DESC;
+
+--Is there a correlation between how many locations a company has and its sales in millions?
+SELECT company, total_units_2019, sales_in_millions_2019 FROM Fast_Food ORDER BY total_units_2019 DESC;
