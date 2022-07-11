@@ -1,0 +1,43 @@
+#This SQL analyzes pay information about SF City employees from 2011-2014.
+
+--Which employee had the highest total pay including benefits, in which year, and in what position?
+SELECT EmployeeName, MAX(TotalPayBenefits), Year, JobTitle 
+FROM Salaries;
+
+--What was the average base pay, overtime pay, and benefits for each position each year?
+SELECT distinct JobTitle, ROUND(AVG(BasePay), 2), ROUND(AVG(OvertimePay), 2), ROUND(AVG(Benefits), 2), Year 
+FROM Salaries 
+GROUP BY JobTitle, Year 
+ORDER BY JobTitle;
+
+--What was the average base pay and total pay of the Chief of Police each year?
+SELECT Year, JobTitle, ROUND(AVG(BasePay), 2) AS AveragePay, Round(AVG(TotalPay), 2) AS TotalPay 
+FROM Salaries 
+WHERE JobTitle 
+LIKE 'chief of police%' 
+GROUP BY Year;
+
+--What was the average base pay and total pay for account clerks each year?
+SELECT Year, JobTitle, ROUND(AVG(BasePay), 2) AS AveragePay, Round(AVG(TotalPay), 2) AS TotalPay 
+FROM Salaries 
+WHERE JobTitle 
+LIKE 'account clerk%' 
+GROUP BY Year;
+
+--What is the average base pay of each position from highest to lowest?
+SELECT JobTitle, ROUND(AVG(BasePay),2) AS Average_Pay 
+FROM Salaries 
+GROUP BY JobTitle 
+ORDER BY Average_Pay DESC;
+
+--Show which position each employee has held and in which years.
+SELECT EmployeeName, JobTitle, Year 
+FROM Salaries
+GROUP BY EmployeeName, Year 
+ORDER BY EmployeeName;
+
+--How many employees worked each different position in 2014?
+SELECT COUNT(*), JobTitle 
+FROM Salaries 
+WHERE Year = 2014 
+GROUP BY JobTitle;
