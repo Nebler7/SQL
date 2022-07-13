@@ -110,6 +110,52 @@ ORDER BY salary DESC
 LIMIT 1, 1), NULL) 
 AS SecondHighestSalary;
 
+--Write an SQL query to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.
+SELECT p.firstname, p.lastname, a.city, a.state 
+FROM Person p 
+LEFT JOIN Address a 
+ON a.personId = p.personId;
+
+--Write an SQL query to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+SELECT v.customer_id, COUNT(v.customer_id) AS count_no_trans 
+FROM Visits v 
+LEFT JOIN Transactions t
+ON v.visit_id = t.visit_id 
+WHERE t.visit_id IS NULL 
+GROUP BY v.customer_id;
+
+--Write an SQL query to find all the authors that viewed at least one of their own articles. Return the result table sorted by id in ascending order.
+SELECT distinct author_id AS id 
+FROM Views 
+WHERE author_id = viewer_id 
+ORDER BY author_id ASC;
+
+--Write an SQL query to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+SELECT w1.id 
+FROM Weather w1, Weather w2 
+WHERE w1.temperature > w2.temperature 
+AND datediff (w1.recordDate, w2.recordDate) = 1; 
+
+--Write an SQL query to report the names of all the salespersons who did not have any orders related to the company with the name "RED".
+SELECT sp.name 
+FROM SalesPerson sp 
+WHERE sp.sales_id 
+NOT IN 
+(SELECT o.sales_id 
+FROM Orders o
+LEFT JOIN Company c 
+ON o.com_id = c.com_id 
+WHERE c.name = 'RED');
+
+
+
+
+
+
+
+
+
+
 
 
 
